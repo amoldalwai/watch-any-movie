@@ -55,14 +55,15 @@ const Detail = (props) => {
         aria-describedby="alert-dialog-description"
         // className="moviePosterDialog"
       >
-        <Iframe
-          url={movielink}
+        <iframe
+          src={movielink}
           width="100%"
           height="550px"
           id="myId"
-          display="block"
-          position="relative"
-          allow="fullscreen"
+          // display="block"
+          // position="relative"
+          // allow="fullscreen"
+          sandbox="allow-same-origin allow-scripts allow-forms"
         />
         <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
         <DialogContent>
@@ -81,7 +82,12 @@ const Detail = (props) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <a href={movielink} color="primary">
+          <a
+            href={movielink}
+            color="primary"
+            target="_blank"
+            // rel="noopener noreferrer"
+          >
             Fullscreen
           </a>
 
