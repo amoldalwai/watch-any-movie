@@ -1,13 +1,66 @@
+/* .img-fluid {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+  padding: 50px;
+}
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  background: #6573c3;
+}
+
+.twt {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  margin: 20px;
+  width: 100%;
+  height: 70px;
+  border: 1px solid gray;
+
+  text-align: center;
+} */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #212121;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+.moviePoster {
+  width: 200px;
+  height: 250px;
+}
+.movieCard {
+  width: 200px;
+  height: 300px;
+  margin-left: 15px;
+  margin-top: 5px;
+
+  float: left;
+}
+.searchResult {
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  text-align: center;
+}
+.searchBtn {
+  background: "#b71c1c";
+  border-top-right-radius: 300px;
+  border-bottom-right-radius: 300px;
+}
+/* .moviePosterDialog {
+  width: 100%;
+  height: 100%;
+} */
+.moviePosterDetail {
+  height: 40vh;
 }
