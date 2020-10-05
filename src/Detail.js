@@ -1,35 +1,53 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Dialog from "@material-ui/core/Dialog";
+// import Fab from "@material-ui/core/Fab";
 import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import Button from "@material-ui/core/Button";
-import Iframe from "react-iframe";
+// import DialogContent from "@material-ui/core/DialogContent";
+// import DialogContentText from "@material-ui/core/DialogContentText";
+// import DialogTitle from "@material-ui/core/DialogTitle";
+// import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
+// import { NavLink } from "react-router-dom";
+// import Iframe from "react-iframe";
+// import Fullscreen from "./Fullscreen";
+// import Fullbtn from "./Fullbtn";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+
 // import PluginManager from "123-movies/src/PluginManager";
-import Chip from "@material-ui/core/Chip";
+// import Chip from "@material-ui/core/Chip";
+// import Popup from "reactjs-popup";
+// import "reactjs-popup/dist/index.css";
+// import ReactPlayer from "react-player";
+// import { Player } from "video-react";
+import { useTheme } from "@material-ui/core/styles";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
 const Detail = (props) => {
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("xl"));
   const [open, setOpen] = React.useState(true);
-  const [movielink, setmovielink] = useState();
 
-  const [year, setyear] = useState();
-  const [genre, setgenre] = useState();
-  const [plot, setplot] = useState();
-  const [title, settitle] = useState("");
-  const [imdbrate, setimdbrate] = useState();
-  const [metascore, setmetascore] = useState();
+  const [movielink, setmovielink] = useState();
+  // const [linktitle, setlinktitle] = useState();
+  // const [poster, setposter] = useState();
+  // const [year, setyear] = useState();
+  // const [genre, setgenre] = useState();
+  // const [plot, setplot] = useState();
+  // const [title, settitle] = useState("");
+  // const [imdbrate, setimdbrate] = useState();
+  // const [metascore, setmetascore] = useState();
   // const video = "";
   axios
     .get(`https://www.omdbapi.com/?apikey=4eb65943&i=${props.imval}`)
     .then((res) => {
-      setyear("(" + res.data.Year + ")");
-      setgenre(res.data.Genre);
-      setplot(res.data.Plot);
-      settitle(res.data.Title);
-      setimdbrate("Imdb: " + res.data.imdbRating);
-      setmetascore("Metascore: " + res.data.Metascore);
+      // setposter(res.data.Poster);
+      // setyear("(" + res.data.Year + ")");
+      // setgenre(res.data.Genre);
+      // setplot(res.data.Plot);
+      // settitle(res.data.Title);
+      // setimdbrate("Imdb: " + res.data.imdbRating);
+      // setmetascore("Metascore: " + res.data.Metascore);
 
       // setlinktitle(title.replace(/ /g, "-").toLowerCase());
       setmovielink(
@@ -49,51 +67,55 @@ const Detail = (props) => {
     <>
       <Dialog
         open={open}
-        maxWidth="xl"
+        // maxWidth="xl"
+        fullScreen={fullScreen}
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
         // className="moviePosterDialog"
       >
+        {/* <img
+          src={poster}
+          maxWidth="sm"
+          className="moviePosterDetail"
+          alt="Poster"
+        /> */}
+
+        {/* <iframe src={movielink} className="moviePosterDetail"></iframe> */}
+        {/* <Pla
+          playsInline
+          poster={poster}
+          src={movielink}
+          // className="moviePosterDetail"
+        /> */}
         <iframe
           src={movielink}
+          title={movielink}
           width="100%"
-          height="550px"
+          height="100%"
           id="myId"
-          // display="block"
-          // position="relative"
-          // allow="fullscreen"
-          sandbox="allow-same-origin allow-scripts allow-forms"
+          className="myClassname"
+          sandbox="allow-same-origin allow-scripts  allow-forms"
         />
-        <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            <span style={{ fontSize: "12px" }}>
-              {genre} <b>{year}</b>
-            </span>
-            <Chip
-              label={metascore}
-              color="secondary"
-              style={{ float: "right" }}
-            />
-            <Chip label={imdbrate} color="primary" style={{ float: "right" }} />
-            <hr />
-            <span>{plot}</span>
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <a
-            href={movielink}
-            color="primary"
-            target="_blank"
-            // rel="noopener noreferrer"
-          >
-            Fullscreen
-          </a>
 
-          <Button onClick={handleClose} color="primary">
-            Close
-          </Button>
+        <DialogActions>
+          {/* <ReactPlayer url={movielink} /> */}
+
+          {/* <iframe src={movielink}></iframe> */}
+
+          <IconButton
+            onClick={handleClose}
+            style={{
+              position: "absolute",
+              top: "0px",
+              left: "0px",
+              color: "white",
+              width: "80px",
+              height: "80px",
+            }}
+          >
+            <ArrowBackIcon fontSize="large" />
+          </IconButton>
         </DialogActions>
       </Dialog>
     </>
