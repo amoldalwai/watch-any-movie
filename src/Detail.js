@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Dialog from "@material-ui/core/Dialog";
 // import Fab from "@material-ui/core/Fab";
-import DialogActions from "@material-ui/core/DialogActions";
+// import DialogActions from "@material-ui/core/DialogActions";
 // import DialogContent from "@material-ui/core/DialogContent";
 // import DialogContentText from "@material-ui/core/DialogContentText";
 // import DialogTitle from "@material-ui/core/DialogTitle";
@@ -92,31 +92,29 @@ const Detail = (props) => {
           src={movielink}
           title={movielink}
           width="100%"
-          height="100%"
+          height="110%"
           id="myId"
           className="myClassname"
           sandbox="allow-same-origin allow-scripts  allow-forms"
         />
 
-        <DialogActions>
-          {/* <ReactPlayer url={movielink} /> */}
+        {/* <ReactPlayer url={movielink} /> */}
 
-          {/* <iframe src={movielink}></iframe> */}
+        {/* <iframe src={movielink}></iframe> */}
 
-          <IconButton
-            onClick={handleClose}
-            style={{
-              position: "absolute",
-              top: "0px",
-              left: "0px",
-              color: "white",
-              width: "80px",
-              height: "80px",
-            }}
-          >
-            <ArrowBackIcon fontSize="large" />
-          </IconButton>
-        </DialogActions>
+        <IconButton
+          onClick={handleClose}
+          style={{
+            position: "absolute",
+            top: "0px",
+            left: "0px",
+            color: "white",
+            width: "80px",
+            height: "80px",
+          }}
+        >
+          <ArrowBackIcon fontSize="large" />
+        </IconButton>
       </Dialog>
     </>
   );
