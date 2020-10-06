@@ -56,7 +56,7 @@ const List = () => {
               width: "250px",
               borderRadius: "5px",
               paddingLeft: "30px",
-              color: "white",
+              color: "red",
               background: "#212121",
               border: "2px",
             }}
