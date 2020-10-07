@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "9e79ba087c117edbd44c",
-    "url": "/watch-any-movie/static/css/main.f8d08211.chunk.css"
+    "revision": "e5f3a1fe142a491dd1eb",
+    "url": "/watch-any-movie/static/css/main.5389adaa.chunk.css"
   },
   {
-    "revision": "9e79ba087c117edbd44c",
-    "url": "/watch-any-movie/static/js/main.2d02f0c9.chunk.js"
+    "revision": "e5f3a1fe142a491dd1eb",
+    "url": "/watch-any-movie/static/js/main.d8d2d91d.chunk.js"
   },
   {
     "revision": "41148716a6004055b4f9",
@@ -20,7 +20,7 @@ self.__precacheManifest = [
     "url": "/watch-any-movie/static/js/2.1a8fdd06.chunk.js"
   },
   {
-    "revision": "2bc856ef4ab679c95dd4a77d4e7c222f",
+    "revision": "99109c986d247a204af1bbc66f9866c8",
     "url": "/watch-any-movie/index.html"
   }
 ];
