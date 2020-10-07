@@ -57,6 +57,9 @@ const Detail = (props) => {
       );
       // video = PluginManager.getVideoURL(movielink);
     });
+  const altServerLink = () => {
+    setmovielink(`https://123moviesplayer.com/movie/${props.imval}`);
+  };
 
   const handleClose = () => {
     setOpen(false);
@@ -90,11 +93,10 @@ const Detail = (props) => {
         /> */}
         <iframe
           src={movielink}
-          title={movielink}
+          title="movieServer"
           width="100%"
-          height="110%"
-          id="myId"
-          className="myClassname"
+          height="100%"
+          style={{ border: "none" }}
           sandbox="allow-same-origin allow-scripts  allow-forms"
         />
 
@@ -114,6 +116,22 @@ const Detail = (props) => {
           }}
         >
           <ArrowBackIcon fontSize="large" />
+        </IconButton>
+        <IconButton
+          onClick={() => altServerLink()}
+          style={{
+            position: "absolute",
+            top: "0px",
+            right: "4vw",
+            color: "white",
+            width: "120px",
+            height: "60px",
+            fontWeight: "bolder",
+            background: "rgb(0,0,0,0.5)",
+            borderRadius: "5px",
+          }}
+        >
+          Server 2
         </IconButton>
       </Dialog>
     </>
