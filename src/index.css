@@ -30,21 +30,21 @@ body {
   background: #212121;
 }
 
-/* code {
+code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
-} */
+}
 .moviePoster {
   width: 200px;
   height: 270px;
 }
-.movieCard {
+/* .movieCard {
   width: 200px;
   height: 270px;
   margin: 10px;
   align-items: center;
   float: left;
-}
+} */
 
 .searchBtn {
   background: "#b71c1c";
@@ -117,7 +117,57 @@ body {
   right: "0px";
   color: "red";
 }
+/* .resultContainer { */
+/* padding-right: 40px; */
+/* padding-left: 11vh; */
+/* } */
+
+/* 
+center results */
+
 .resultContainer {
-  /* padding-right: 40px; */
-  padding-left: 11vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  /* width: 30px;
+  height: 30px; */
+}
+.movieCard {
+  /* display: inline-block; */
+  width: 200px;
+  height: 270px;
+  margin: 5px;
+}
+
+.pagination .first {
+  display: inline-block;
+
+  margin: 3px;
+}
+.first {
+  border: 2px solid red;
+  width: 200px;
+  height: 270px;
+}
+.movieDataDiv {
+  color: white;
+  height: 100%;
+  background: #212121;
+}
+.moviePosterDiv {
+  width: 100%;
+  height: 40vh;
+}
+.playBtn {
+  position: fixed;
+  top: -27px;
+  left: 75%;
+}
+
+.movieContent {
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: -60px;
+
+  padding: 20px;
 }

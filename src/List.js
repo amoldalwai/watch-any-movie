@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState ,useEffect} from "react";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import axios from "axios";
@@ -7,13 +7,14 @@ import Fab from "@material-ui/core/Fab";
 import Footer from "./Footer";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
-import Button from "@material-ui/core/Button";
+// import Button from "@material-ui/core/Button";
 
 import Detail from "./Detail";
 
 const List = () => {
   const [stext, setstext] = useState("avengers");
   const [result, setresult] = useState([]);
+  // const [marvel, setmarvel] = useState([]);
   const [detailbool, setdetailbool] = useState(false);
   const [imval, setimval] = useState();
 
@@ -27,7 +28,7 @@ const List = () => {
         setresult(res.data.Search.map((p) => p));
       })
       .catch((error) => {
-        alert("No search results found!! Check for spelling ");
+        alert("No search results found!! check for spelling ");
       });
   };
   function showDetail(i) {
@@ -38,9 +39,11 @@ const List = () => {
   function funsetdetailbool() {
     setdetailbool(false);
   }
+  
   useEffect(() => {
     show();
   }, []);
+
   return (
     <>
       <center>
@@ -76,43 +79,45 @@ const List = () => {
         </div>
         <br />
         {/* <Display result={result}/> */}
-        {result.map((p) => (
-          <div
-            key={p.imdbID}
-            onClick={() => showDetail(p.imdbID)}
-            className="resultContainer"
-          >
-            <Card className="movieCard">
-              <CardActionArea>
-                <img className="moviePoster" src={p.Poster} alt={p.Title} />
+        <center>
+          <div className="resultContainer">
+            {result.map((p) => (
+              <div key={p.imdbID} onClick={() => showDetail(p.imdbID)}>
+                <Card className="movieCard">
+                  <CardActionArea>
+                    <img className="moviePoster" src={p.Poster} alt={p.Title} />
 
-                <Button
-                  variant="contained"
-                  style={{
-                    position: "absolute",
-                    top: "0px",
-                    right: "0px",
-                    background: "rgba(0, 0, 0, 0.5)",
-                    color: "white",
-                    borderRadius: "4px",
-                  }}
-                >
-                  <b> {p.Year}</b>
-                </Button>
-                <div className="middle">
-                  <div className="text">
-                    <PlayCircleFilledIcon
-                      className="playHoverIcon"
-                      fontSize="large"
-                      style={{ color: "#aa2e25", fontSize: "60px" }}
-                    />
-                  </div>
-                </div>
-                <div className="overlay">{p.Title}</div>
-              </CardActionArea>
-            </Card>
+                    <span
+                      variant="contained"
+                      style={{
+                        position: "absolute",
+                        top: "0px",
+                        right: "0px",
+                        background: "rgba(0, 0, 0, 0.5)",
+                        color: "white",
+                        borderRadius: "4px",
+                      }}
+                    >
+                      <b> {p.Year}</b>
+                    </span>
+                    <div className="middle">
+                      <div className="text">
+                        <PlayCircleFilledIcon
+                          className="playHoverIcon"
+                          fontSize="large"
+                          style={{ color: "#aa2e25", fontSize: "60px" }}
+                        />
+                      </div>
+                    </div>
+                    <div className="overlay">{p.Title}</div>
+                  </CardActionArea>
+                </Card>
+              </div>
+            ))}
           </div>
-        ))}
+        </center>
+
+       
 
         {detailbool ? (
           <Detail imval={imval} funsetdetailbool={funsetdetailbool} />
