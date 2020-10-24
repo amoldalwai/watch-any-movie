@@ -33,10 +33,12 @@ const Detail = (props) => {
   const fullScreenData = useMediaQuery(theme.breakpoints.down("xs"));
   const [open, setOpen] = React.useState(true);
   const [openfs, setOpenfs] = React.useState(false);
-  // const [altServer, setaltServer] = useState();
+  const [openSeries, setOpenSeries] = React.useState(false);
+  
 
   const [movielink, setmovielink] = useState();
-  // const [linktitle, setlinktitle] = useState();
+  const [serieslink, setserieslink] = useState();
+  
   const [poster, setposter] = useState("https://i.pinimg.com/originals/ff/20/1b/ff201b10f8fb094d3ac640f8687ed511.gif");
   const [year, setyear] = useState("Loading...");
   const [genre, setgenre] = useState("Loading...");
@@ -44,7 +46,9 @@ const Detail = (props) => {
   const [title, settitle] = useState("Loading...");
   const [imdbrate, setimdbrate] = useState("...");
   const [metascore, setmetascore] = useState("...");
-  // const video = "";
+  const [mtype,setmtype]=useState();
+  const [season,setseason]=useState("01");
+  
   axios
     .get(`https://www.omdbapi.com/?apikey=4eb65943&i=${props.imval}`)
     .then((res) => {
@@ -55,25 +59,27 @@ const Detail = (props) => {
       settitle(res.data.Title);
       setimdbrate("Imdb: " + res.data.imdbRating);
       setmetascore("Metascore: " + res.data.Metascore);
+      setmtype(res.data.Type);
 
-      // setlinktitle(title.replace(/ /g, "-").toLowerCase());
+     
+
+       
+
+      
       setmovielink(
-        // `https://moviehungershaven.xyz/tplayer/npls1.php?id=${props.imval}`
-        //  ` https://database.gdriveplayer.io/player.php?imdb=${props.imval}`
+      
         `javascript:window.location.replace("https://database.gdriveplayer.io/player.php?imdb=${props.imval}")`
-        //`https://123moviesplayer.com/movie/${props.imval}`
-        //`javascript:window.location.replace("https://123moviesplayer.com/movie/${props.imval}")`
-        // `https://moviehungershaven.xyz/tplayer/npls1.php?id=${props.imval}`
+      
       );
-      // setaltServer(
-      //   `javascript:window.location.replace("https://123moviesplayer.com/movie/${props.imval}")`
-      // );
-
-      // video = PluginManager.getVideoURL(movielink);
+      setserieslink(
+      
+        `javascript:window.location.replace("https://gomo.to/show/${props.imval}/01-01")`
+      
+      );
+      
     });
-  const altServerLink = () => {
-    setmovielink(`https://123moviesplayer.com/movie/${props.imval}`);
-  };
+    
+  
 
   const handleClose = () => {
     setOpen(false);
@@ -85,6 +91,13 @@ const Detail = (props) => {
 
   const handleCloseFs = () => {
     setOpenfs(false);
+  };
+  const handleClickOpenSeries = () => {
+    setOpenSeries(true);
+  };
+
+  const handleCloseSeries = () => {
+    setOpenSeries(false);
   };
 
   return (
@@ -99,33 +112,20 @@ const Detail = (props) => {
         
          
       >
-        {/* <img
-          src={poster}
-          maxWidth="sm"
-          className="moviePosterDetail"
-          alt="Poster"
-        /> */}
-
-        {/* <iframe src={movielink} className="moviePosterDetail"></iframe> */}
-        {/* <Pla
-          playsInline
-          poster={poster}
-          src={movielink}
-          // className="moviePosterDetail"
-        /> */}
+       
        <div className="movieDataDiv " >
        <img src={poster} className="moviePosterDiv"  alt ="movie-poster"/>
        <IconButton
           onClick={handleClose}
           style={{
             position: "absolute",
-            top: "0px",
-            left: "0px",
+            top: "5px",
+            left: "5px",
             color: "white",
-            width: "80px",
-            height: "80px",
+            width: "60px",
+            height: "60px",
             background: "rgb(0,0,0,0.3)",
-            borderRadius: "5px",
+            borderRadius: "100%",
             
           }}
         >
@@ -133,7 +133,7 @@ const Detail = (props) => {
         </IconButton>
 
        <Fab color="primary" style={{
-              background: "#b71c1c"}} fontSize="large" onClick={handleClickOpenFs} className="playBtn">
+              background: "#b71c1c"}} fontSize="large" onClick={()=>{  (mtype ==="series") ? handleClickOpenSeries() : handleClickOpenFs()}} className="playBtn">
         <PlayArrowIcon />
       </Fab>
       
@@ -143,6 +143,7 @@ const Detail = (props) => {
    
       <span style={{float:"right"}}>{year}</span>
       <span style={{float:"left"}}>{genre}</span>
+       {/* <span>Type:{mtype}</span> */}
       
       <i style={{color:"gray",float:"left",marginTop:"10px"}}>{plot}</i>
       
@@ -167,9 +168,9 @@ const Detail = (props) => {
         </div>
 
       
-
-       
         
+       
+           
 
 
          {/* btn to full screen  */}
@@ -186,6 +187,7 @@ const Detail = (props) => {
         onClose={handleCloseFs}
         aria-labelledby="responsive-dialog-title"
       >
+       
             <iframe
           src={movielink}
           title="movieServer"
@@ -195,17 +197,38 @@ const Detail = (props) => {
           style={{ border: "none" }}
           sandbox="allow-same-origin allow-scripts  allow-forms"
         />
-          
+          <select 
+          value={movielink}
+            onChange={ (event)=>{setmovielink(event.target.value+`${props.imval}`);}}
+            style={{
+              position: "absolute",
+              top: "5px",
+              right: "12vw",
+              color: "white",
+              width: "90px",
+              height: "50px",
+              background: "rgb(0,0,0,0.5)",
+              padding:"5px",
+              borderRadius:"5px"
+            
+              
+            }}
+          >
+            <option value="https://database.gdriveplayer.io/player.php?imdb=">server 1</option>
+            <option value="https://gomo.to/movie/">server 2</option>
+            <option value="https://123moviesplayer.com/movie/">server 3</option>
+            <option value="https://database.gdriveplayer.io/player.php?imdb=">server 4</option>
+            </select>
       
           <IconButton
           onClick={handleCloseFs}
           style={{
             position: "absolute",
-            top: "0px",
-            left: "0px",
+            top: "5px",
+            left: "5px",
             color: "white",
-            width: "80px",
-            height: "80px",
+            width: "60px",
+            height: "60px",
             background: "rgb(0,0,0,0.5)",
             borderRadius: "100%",
             
@@ -215,22 +238,7 @@ const Detail = (props) => {
         
           </IconButton>
 
-          <IconButton
-          onClick={() => altServerLink()}
-          style={{
-            position: "absolute",
-            top: "0px",
-            right: "15vw",
-            color: "white",
-            width: "120px",
-            height: "60px",
-            fontWeight: "bolder",
-            background: "rgb(0,0,0,0.5)",
-            borderRadius: "5px",
-          }}
-        >
-          Server 2
-        </IconButton>
+         
        
       </Dialog>
     </div>
@@ -238,7 +246,110 @@ const Detail = (props) => {
 
       </Dialog>
 
+     {/* series iframe */}
+
+     <Dialog
+        fullScreen={fullScreen}
+        open={openSeries}
+        onClose={handleCloseSeries}
+        aria-labelledby="responsive-dialog-title"
+      > 
      
+        <iframe
+          src={serieslink}
+          title="movieServer"
+          width="100%"
+          height="100%"
+          id="myId"
+          style={{ border: "none" }}
+          sandbox="allow-same-origin allow-scripts  allow-forms"
+        />
+ {/* for seasons */}
+ <select 
+          value={season}
+            onChange={ (event)=>{setseason(event.target.value)}}
+            style={{
+              position: "absolute",
+              top: "5px",
+              left: "25vw",
+            
+              color: "white",
+              width: "90px",
+              height: "50px",
+              background: "rgb(0,0,0,0.5)",
+              padding:"5px",
+              borderRadius:"5px"
+            
+              
+            }}
+          >
+            <option value="01" selected="selected">Season </option>
+            <option value="01" >Season 1</option>
+            <option value="02" >Season 2</option>
+            <option value="03" >Season 3</option>
+            <option value="04" >Season 4</option>
+            <option value="02" >Season 5</option>
+            <option value="06" >Season 6</option>
+            <option value="07" >Season 7</option>
+            <option value="08" >Season 8</option>
+            <option value="09" >Season 9</option>
+            <option value="10" >Season 10</option>
+            </select>
+        {/* for  episode */}
+          <select 
+          value={serieslink}
+            onChange={ (event)=>{setserieslink(`https://gomo.to/show/`+`${props.imval}/`+`${season}`+`-`+event.target.value );}}
+            style={{
+              position: "absolute",
+              top: "5px",
+              right: "12vw",
+              color: "white",
+              width: "90px",
+              height: "50px",
+              background: "rgb(0,0,0,0.5)",
+              padding:"5px",
+              borderRadius:"5px"
+            
+              
+            }}
+          >
+            <option value="01" selected="selected">Episode</option>
+            <option value="01" >Ep 1</option>
+            <option value="02" >Ep 2</option>
+            <option value="03" >Ep 3</option>
+            <option value="04" >Ep 4</option>
+            <option value="02" >Ep 5</option>
+            <option value="06" >Ep 6</option>
+            <option value="07" >Ep 7</option>
+            <option value="08" >Ep 8</option>
+            <option value="09" >Ep 9</option>
+            <option value="10" >Ep 10</option>
+            </select>
+
+           
+      
+          <IconButton
+          onClick={handleCloseSeries}
+          style={{
+            position: "absolute",
+            top: "5px",
+            left: "5px",
+            color: "white",
+            width: "60px",
+            height: "60px",
+            background: "rgb(0,0,0,0.5)",
+            borderRadius: "100%",
+            
+          }}>
+
+           <ArrowBackIcon fontSize="large" />
+        
+          </IconButton>
+ 
+
+
+          
+      </Dialog>
       
     </>
   );
