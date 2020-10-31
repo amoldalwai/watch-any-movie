@@ -35,8 +35,8 @@ code {
     monospace;
 }
 .moviePoster {
-  width: 200px;
-  height: 270px;
+  width: 160px;
+  height: 220px;
 }
 /* .movieCard {
   width: 200px;
@@ -105,7 +105,7 @@ code {
 .text {
   color: white;
   font-size: 50px;
-  width: 150px;
+  width: 160px;
   height: 150px;
   padding: 16px 32px;
 }
@@ -134,9 +134,9 @@ center results */
 }
 .movieCard {
   /* display: inline-block; */
-  width: 200px;
-  height: 270px;
-  margin: 5px;
+  width: 160px;
+  height: 220px;
+  margin: 3px;
 }
 
 .pagination .first {
@@ -146,12 +146,13 @@ center results */
 }
 .first {
   border: 2px solid red;
-  width: 200px;
-  height: 270px;
+  width: 160px;
+  height: 220px;
 }
 .movieDataDiv {
   color: white;
   height: 100%;
+
   background: #212121;
 }
 .moviePosterDiv {

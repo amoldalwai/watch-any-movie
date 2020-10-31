@@ -3,29 +3,23 @@ import axios from "axios";
 import Dialog from "@material-ui/core/Dialog";
 import Chip from '@material-ui/core/Chip';
 import Fab from "@material-ui/core/Fab";
-// import DialogActions from "@material-ui/core/DialogActions";
-// import ReactPlayer from "react-player";
-// import Button from '@material-ui/core/Button';
+import YouTubeIcon from '@material-ui/icons/YouTube';
+
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-// import DialogContent from "@material-ui/core/DialogContent";
-// import DialogContentText from "@material-ui/core/DialogContentText";
-// import DialogTitle from "@material-ui/core/DialogTitle";
-// import Button from "@material-ui/core/Button";
+
 import IconButton from "@material-ui/core/IconButton";
-// import { NavLink } from "react-router-dom";
-// import Iframe from "react-iframe";
-// import Fullscreen from "./Fullscreen";
-// import Fullbtn from "./Fullbtn";
+
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
-// import PluginManager from "123-movies/src/PluginManager";
-// import Chip from "@material-ui/core/Chip";
-// import Popup from "reactjs-popup";
-// import "reactjs-popup/dist/index.css";
-// import ReactPlayer from "react-player";
-// import { Player } from "video-react";
+
+
 import { useTheme } from "@material-ui/core/styles";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+
+
+
+
+
 
 const Detail = (props) => {
   const theme = useTheme();
@@ -34,12 +28,14 @@ const Detail = (props) => {
   const [open, setOpen] = React.useState(true);
   const [openfs, setOpenfs] = React.useState(false);
   const [openSeries, setOpenSeries] = React.useState(false);
+  const [openTrailer, setOpenTrailer] = React.useState(false);
   
 
   const [movielink, setmovielink] = useState();
   const [serieslink, setserieslink] = useState();
+  const [ytlink, setytlink] = useState();
   
-  const [poster, setposter] = useState("https://i.pinimg.com/originals/ff/20/1b/ff201b10f8fb094d3ac640f8687ed511.gif");
+  const [poster, setposter] = useState("https://webinars.motivatingthemasses.com/fromgood2unforgettable/images/poster-loading.gif");
   const [year, setyear] = useState("Loading...");
   const [genre, setgenre] = useState("Loading...");
   const [plot, setplot] = useState("Loading...");
@@ -69,15 +65,25 @@ const Detail = (props) => {
       setmovielink(
       
         `javascript:window.location.replace("https://database.gdriveplayer.io/player.php?imdb=${props.imval}")`
+       // `https://videospider.in/getvideo?key=Ez99ULqORLkSi7LH&video_id=${props.imval}`
       
       );
       setserieslink(
       
         `javascript:window.location.replace("https://gomo.to/show/${props.imval}/01-01")`
+       //` https://moviehungershaven.xyz/itv/tvs1.php?imdbid=${props.imval}&season=1&episode=1`
+      // `https://fsapi.xyz/tv-tmdb/84105-2-4`
       
       );
       
     });
+
+    
+      
+
+
+  
+
     
   
 
@@ -99,16 +105,45 @@ const Detail = (props) => {
   const handleCloseSeries = () => {
     setOpenSeries(false);
   };
+  const handleClickOpenTrailer = () => {
+    axios
+    .get(`https://api.themoviedb.org/3/movie/${props.imval}/videos?api_key=d8bf019d0cca372bd804735f172f67e8`)
+    .then((res) => {
+     // console.log(res.data.results[0].key);
+    
+     setytlink("https://www.youtube.com/embed/"+res.data.results[0].key);
+     //https://api.themoviedb.org/3/tv/79352/videos?api_key=d8bf019d0cca372bd804735f172f67e8
+     setOpenTrailer(true);
+
+    })
+    .catch((error) => {
+      alert("No trailer found ");
+      
+    });
+    
+  };
+
+  const handleCloseTrailer = () => {
+    setOpenTrailer(false);
+  };
+
+  
+
+ 
+
 
   return (
     <>
+    
       <Dialog
         open={open}
-        // maxWidth="xl"
+         maxWidth='xs'
         fullScreen={fullScreenData}
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
+        // TransitionComponent={Transition}
+      
         
          
       >
@@ -132,6 +167,23 @@ const Detail = (props) => {
           <ArrowBackIcon fontSize="large" />
         </IconButton>
 
+        <IconButton
+          onClick={handleClickOpenTrailer}
+          style={{
+            position: "absolute",
+            top: "5px",
+            right: "5px",
+            color: "#b71c1c",
+            width: "50px",
+            height: "50px",
+            background: "white"
+            
+            
+          }}
+        >
+          <YouTubeIcon  fontSize="large" />
+        </IconButton>
+
        <Fab color="primary" style={{
               background: "#b71c1c"}} fontSize="large" onClick={()=>{  (mtype ==="series") ? handleClickOpenSeries() : handleClickOpenFs()}} className="playBtn">
         <PlayArrowIcon />
@@ -139,6 +191,7 @@ const Detail = (props) => {
       
          <div className="movieContent">
       <h4>{title}</h4>
+      {ytlink}
       <hr style={{background:"white"}}/>
    
       <span style={{float:"right"}}>{year}</span>
@@ -186,6 +239,8 @@ const Detail = (props) => {
         open={openfs}
         onClose={handleCloseFs}
         aria-labelledby="responsive-dialog-title"
+        // TransitionComponent={Transition}
+        
       >
        
             <iframe
@@ -195,7 +250,7 @@ const Detail = (props) => {
           height="100%"
           id="myId"
           style={{ border: "none" }}
-          sandbox="allow-same-origin allow-scripts  allow-forms"
+          sandbox="allow-same-origin allow-scripts allow-forms"
         />
           <select 
           value={movielink}
@@ -217,7 +272,7 @@ const Detail = (props) => {
             <option value="https://database.gdriveplayer.io/player.php?imdb=">server 1</option>
             <option value="https://gomo.to/movie/">server 2</option>
             <option value="https://123moviesplayer.com/movie/">server 3</option>
-            <option value="https://database.gdriveplayer.io/player.php?imdb=">server 4</option>
+            <option value="https://videospider.in/getvideo?key=Ez99ULqORLkSi7LH&video_id=">server 4</option>
             </select>
       
           <IconButton
@@ -253,6 +308,7 @@ const Detail = (props) => {
         open={openSeries}
         onClose={handleCloseSeries}
         aria-labelledby="responsive-dialog-title"
+        
       > 
      
         <iframe
@@ -266,7 +322,7 @@ const Detail = (props) => {
         />
  {/* for seasons */}
  <select 
-          value={season}
+          defaultValue={season}
             onChange={ (event)=>{setseason(event.target.value)}}
             style={{
               position: "absolute",
@@ -283,22 +339,23 @@ const Detail = (props) => {
               
             }}
           >
-            <option value="01" selected="selected">Season </option>
-            <option value="01" >Season 1</option>
-            <option value="02" >Season 2</option>
-            <option value="03" >Season 3</option>
-            <option value="04" >Season 4</option>
-            <option value="02" >Season 5</option>
-            <option value="06" >Season 6</option>
-            <option value="07" >Season 7</option>
-            <option value="08" >Season 8</option>
-            <option value="09" >Season 9</option>
+            <option value="1" selected="selected">Season </option>
+            <option value="1" >Season 1</option>
+            <option value="2" >Season 2</option>
+            <option value="3" >Season 3</option>
+            <option value="4" >Season 4</option>
+            <option value="2" >Season 5</option>
+            <option value="6" >Season 6</option>
+            <option value="7" >Season 7</option>
+            <option value="8" >Season 8</option>
+            <option value="9" >Season 9</option>
             <option value="10" >Season 10</option>
             </select>
         {/* for  episode */}
           <select 
           value={serieslink}
-            onChange={ (event)=>{setserieslink(`https://gomo.to/show/`+`${props.imval}/`+`${season}`+`-`+event.target.value );}}
+           // onChange={ (event)=>{setserieslink(`https://gomo.to/show/`+`${props.imval}/`+`${season}`+`-`+event.target.value );}}
+           onChange={ (event)=>{setserieslink(`https://moviehungershaven.xyz/itv/tvs1.php?imdbid=`+`${props.imval}&season=`+`${season}&episode=`+event.target.value );}}
             style={{
               position: "absolute",
               top: "5px",
@@ -313,16 +370,16 @@ const Detail = (props) => {
               
             }}
           >
-            <option value="01" selected="selected">Episode</option>
-            <option value="01" >Ep 1</option>
-            <option value="02" >Ep 2</option>
-            <option value="03" >Ep 3</option>
-            <option value="04" >Ep 4</option>
-            <option value="02" >Ep 5</option>
-            <option value="06" >Ep 6</option>
-            <option value="07" >Ep 7</option>
-            <option value="08" >Ep 8</option>
-            <option value="09" >Ep 9</option>
+            <option value="1" selected="selected">Episode</option>
+            <option value="1" >Ep 1</option>
+            <option value="2" >Ep 2</option>
+            <option value="3" >Ep 3</option>
+            <option value="4" >Ep 4</option>
+            <option value="2" >Ep 5</option>
+            <option value="6" >Ep 6</option>
+            <option value="7" >Ep 7</option>
+            <option value="8" >Ep 8</option>
+            <option value="9" >Ep 9</option>
             <option value="10" >Ep 10</option>
             </select>
 
@@ -346,11 +403,57 @@ const Detail = (props) => {
         
           </IconButton>
  
-
+         
 
           
       </Dialog>
       
+      {/* for trailer */}
+      <Dialog
+        fullScreen={fullScreen}
+        open={openTrailer}
+        onClose={handleCloseTrailer}
+        aria-labelledby="responsive-dialog-title"
+        
+      > 
+      
+      <iframe
+       
+      src={ytlink}
+      title="TrailerServer"
+      width="100%"
+      height="100%"
+      id="myTrailer"
+      style={{ border: "none" }}
+
+
+      />
+
+      <IconButton
+          onClick={handleCloseTrailer}
+          style={{
+            position: "absolute",
+            top: "5px",
+            left: "5px",
+            color: "white",
+            width: "60px",
+            height: "60px",
+            background: "rgb(0,0,0,0.5)",
+            borderRadius: "100%",
+            
+          }}>
+
+           <ArrowBackIcon fontSize="large" />
+        
+          </IconButton>
+      
+      
+      
+      
+      </Dialog>
+
+
+
     </>
   );
 };
