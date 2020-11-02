@@ -173,10 +173,10 @@ const Detail = (props) => {
             position: "absolute",
             top: "5px",
             right: "5px",
-            color: "#b71c1c",
+            color: "white",
             width: "50px",
             height: "50px",
-            background: "white"
+            background: "rgb(0,0,0,0.3)"
             
             
           }}
@@ -191,7 +191,7 @@ const Detail = (props) => {
       
          <div className="movieContent">
       <h4>{title}</h4>
-      {ytlink}
+      
       <hr style={{background:"white"}}/>
    
       <span style={{float:"right"}}>{year}</span>
@@ -269,10 +269,10 @@ const Detail = (props) => {
               
             }}
           >
-            <option value="https://database.gdriveplayer.io/player.php?imdb=">server 1</option>
-            <option value="https://gomo.to/movie/">server 2</option>
-            <option value="https://123moviesplayer.com/movie/">server 3</option>
-            <option value="https://videospider.in/getvideo?key=Ez99ULqORLkSi7LH&video_id=">server 4</option>
+            <option value="https://database.gdriveplayer.io/player.php?imdb=">Server 1</option>
+            <option value="https://gomo.to/movie/">Server 2</option>
+            <option value="https://123moviesplayer.com/movie/">Server 3</option>
+            <option value="https://videospider.in/getvideo?key=Ez99ULqORLkSi7LH&video_id=">use adblocker</option>
             </select>
       
           <IconButton
@@ -354,8 +354,8 @@ const Detail = (props) => {
         {/* for  episode */}
           <select 
           value={serieslink}
-           // onChange={ (event)=>{setserieslink(`https://gomo.to/show/`+`${props.imval}/`+`${season}`+`-`+event.target.value );}}
-           onChange={ (event)=>{setserieslink(`https://moviehungershaven.xyz/itv/tvs1.php?imdbid=`+`${props.imval}&season=`+`${season}&episode=`+event.target.value );}}
+            onChange={ (event)=>{setserieslink(`https://gomo.to/show/`+`${props.imval}/`+`${season}`+`-`+event.target.value );}}
+           //onChange={ (event)=>{setserieslink(`https://moviehungershaven.xyz/itv/tvs1.php?imdbid=`+`${props.imval}&season=`+`${season}&episode=`+event.target.value );}}
             style={{
               position: "absolute",
               top: "5px",
@@ -370,16 +370,16 @@ const Detail = (props) => {
               
             }}
           >
-            <option value="1" selected="selected">Episode</option>
-            <option value="1" >Ep 1</option>
-            <option value="2" >Ep 2</option>
-            <option value="3" >Ep 3</option>
-            <option value="4" >Ep 4</option>
-            <option value="2" >Ep 5</option>
-            <option value="6" >Ep 6</option>
-            <option value="7" >Ep 7</option>
-            <option value="8" >Ep 8</option>
-            <option value="9" >Ep 9</option>
+            <option value="01" selected="selected">Episode</option>
+            <option value="01" >Ep 1</option>
+            <option value="02" >Ep 2</option>
+            <option value="03" >Ep 3</option>
+            <option value="04" >Ep 4</option>
+            <option value="02" >Ep 5</option>
+            <option value="06" >Ep 6</option>
+            <option value="07" >Ep 7</option>
+            <option value="08" >Ep 8</option>
+            <option value="09" >Ep 9</option>
             <option value="10" >Ep 10</option>
             </select>
 

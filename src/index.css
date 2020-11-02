@@ -37,6 +37,7 @@ code {
 .moviePoster {
   width: 160px;
   height: 220px;
+  background: url("./img_prld.jpg") center center no-repeat;
 }
 /* .movieCard {
   width: 200px;
@@ -171,4 +172,9 @@ center results */
   margin-top: -60px;
 
   padding: 20px;
+}
+
+iframe {
+  background: url("./preloader_iframe.gif") center center no-repeat;
+  background-color: black;
 }
