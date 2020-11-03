@@ -46,7 +46,7 @@ const List = () => {
 
   const show2 = () => {
     axios
-    .get(`https://www.omdbapi.com/?apikey=4eb65943&s=${stext}&page=2`)
+    .get(`https://www.omdbapi.com/?apikey=5fcb333a&s=${stext}&page=2`)
     .then((res) => {
       setresult2(res.data.Search.map((s) => s));
       

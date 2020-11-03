@@ -159,6 +159,7 @@ center results */
 .moviePosterDiv {
   width: 100%;
   height: 40vh;
+  min-height: 150px;
 }
 .playBtn {
   position: fixed;

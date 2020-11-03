@@ -29,6 +29,8 @@ const Detail = (props) => {
   const [openfs, setOpenfs] = React.useState(false);
   const [openSeries, setOpenSeries] = React.useState(false);
   const [openTrailer, setOpenTrailer] = React.useState(false);
+
+  
   
 
   const [movielink, setmovielink] = useState();
@@ -46,7 +48,7 @@ const Detail = (props) => {
   const [season,setseason]=useState("01");
   
   axios
-    .get(`https://www.omdbapi.com/?apikey=4eb65943&i=${props.imval}`)
+    .get(`https://www.omdbapi.com/?apikey=e630e8d2&i=${props.imval}`)
     .then((res) => {
       setposter(res.data.Poster);
       setyear("(" + res.data.Year + ")");
@@ -106,6 +108,8 @@ const Detail = (props) => {
     setOpenSeries(false);
   };
   const handleClickOpenTrailer = () => {
+    if(mtype==='movie')
+    {
     axios
     .get(`https://api.themoviedb.org/3/movie/${props.imval}/videos?api_key=d8bf019d0cca372bd804735f172f67e8`)
     .then((res) => {
@@ -117,11 +121,52 @@ const Detail = (props) => {
 
     })
     .catch((error) => {
-      alert("No trailer found ");
+      alert("No trailer found for this movie!!!");
       
     });
+  }
+  else
+  {
+    axios
+    .get(`https://api.themoviedb.org/3/find/${props.imval}?api_key=d8bf019d0cca372bd804735f172f67e8&external_source=imdb_id`)
+    .then((res) => {
+      //console.log(res.data.tv_results[0].id);
+    
+    
+   // alert(res.data.tv_results[0].id);
+   axios
+   .get(`https://api.themoviedb.org/3/tv/`+res.data.tv_results[0].id+`/videos?api_key=d8bf019d0cca372bd804735f172f67e8`)
+   .then((res) => {
+    // console.log(res.data.results[0].key);
+    
+   
+   setytlink("https://www.youtube.com/embed/"+res.data.results[0].key);
+   setOpenTrailer(true);
+
+   })
+   .catch((error) => {
+     alert("No trailer found for this web series!!!");
+     
+   });
+    
+    
+
+    })
+    .catch((error) => {
+      alert("No trailer found for this web series!!");
+      
+    });
+     
+    
+    
+    
+   
+    
+  }
     
   };
+  
+  
 
   const handleCloseTrailer = () => {
     setOpenTrailer(false);
@@ -339,16 +384,16 @@ const Detail = (props) => {
               
             }}
           >
-            <option value="1" selected="selected">Season </option>
-            <option value="1" >Season 1</option>
-            <option value="2" >Season 2</option>
-            <option value="3" >Season 3</option>
-            <option value="4" >Season 4</option>
-            <option value="2" >Season 5</option>
-            <option value="6" >Season 6</option>
-            <option value="7" >Season 7</option>
-            <option value="8" >Season 8</option>
-            <option value="9" >Season 9</option>
+            <option value="01" selected="selected">Season </option>
+            <option value="01" >Season 1</option>
+            <option value="02" >Season 2</option>
+            <option value="03" >Season 3</option>
+            <option value="04" >Season 4</option>
+            <option value="02" >Season 5</option>
+            <option value="06" >Season 6</option>
+            <option value="07" >Season 7</option>
+            <option value="08" >Season 8</option>
+            <option value="09" >Season 9</option>
             <option value="10" >Season 10</option>
             </select>
         {/* for  episode */}
