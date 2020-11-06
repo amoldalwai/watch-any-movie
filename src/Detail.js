@@ -46,6 +46,8 @@ const Detail = (props) => {
   const [metascore, setmetascore] = useState("...");
   const [mtype,setmtype]=useState();
   const [season,setseason]=useState("01");
+  const [sandbox,setSandbox]=useState(true);
+
   
   axios
     .get(`https://www.omdbapi.com/?apikey=e630e8d2&i=${props.imval}`)
@@ -77,6 +79,7 @@ const Detail = (props) => {
       // `https://fsapi.xyz/tv-tmdb/84105-2-4`
       
       );
+      
       
     });
 
@@ -118,6 +121,7 @@ const Detail = (props) => {
      setytlink("https://www.youtube.com/embed/"+res.data.results[0].key);
      //https://api.themoviedb.org/3/tv/79352/videos?api_key=d8bf019d0cca372bd804735f172f67e8
      setOpenTrailer(true);
+
 
     })
     .catch((error) => {
@@ -172,6 +176,7 @@ const Detail = (props) => {
     setOpenTrailer(false);
   };
 
+  
   
 
  
@@ -295,11 +300,31 @@ const Detail = (props) => {
           height="100%"
           id="myId"
           style={{ border: "none" }}
-          sandbox="allow-same-origin allow-scripts allow-forms"
+          //sandbox="allow-same-origin allow-scripts allow-forms"
+          {...(sandbox ? {sandbox:'allow-same-origin allow-scripts allow-forms'}:{})}
         />
           <select 
           value={movielink}
-            onChange={ (event)=>{setmovielink(event.target.value+`${props.imval}`);}}
+            onChange={ 
+              (event)=>
+              { 
+                
+                if(event.target.value ==='https://videospider.in/getvideo?key=Ez99ULqORLkSi7LH&video_id=')
+                {
+                  setSandbox(false);
+             // alert("videospider");
+                  
+                }
+                else
+                {
+                  setSandbox(true);
+               
+                 
+                }
+             
+                setmovielink(event.target.value+`${props.imval}`);
+              }
+              }
             style={{
               position: "absolute",
               top: "5px",
@@ -317,7 +342,8 @@ const Detail = (props) => {
             <option value="https://database.gdriveplayer.io/player.php?imdb=">Server 1</option>
             <option value="https://gomo.to/movie/">Server 2</option>
             <option value="https://123moviesplayer.com/movie/">Server 3</option>
-            <option value="https://videospider.in/getvideo?key=Ez99ULqORLkSi7LH&video_id=">use adblocker</option>
+            <option value="https://v2.vidsrc.me/embed/">Server 4</option>
+            <option value="https://videospider.in/getvideo?key=Ez99ULqORLkSi7LH&video_id=">use AdBlocker</option>
             </select>
       
           <IconButton
