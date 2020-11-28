@@ -139,8 +139,9 @@ const List = () => {
               background: "#b71c1c",
               borderRadius: "7px",
             }}
+            onClick={show}
           >
-            <SearchIcon onClick={show} />
+            <SearchIcon  />
           </Fab>
           <br />
           <br />

@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState}  from "react";
 import axios from "axios";
 import Dialog from "@material-ui/core/Dialog";
 import Chip from '@material-ui/core/Chip';
 import Fab from "@material-ui/core/Fab";
 import YouTubeIcon from '@material-ui/icons/YouTube';
+import HighQualityIcon from '@material-ui/icons/HighQuality';
+import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
+import Button from '@material-ui/core/Button';
 
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 
@@ -15,6 +19,9 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 import { useTheme } from "@material-ui/core/styles";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import ScriptTag from 'react-script-tag';
+
+
 
 
 
@@ -30,7 +37,9 @@ const Detail = (props) => {
   const [openSeries, setOpenSeries] = React.useState(false);
   const [openTrailer, setOpenTrailer] = React.useState(false);
 
-  
+  const [openYTS, setOpenYTS] = React.useState(false);
+
+
   
 
   const [movielink, setmovielink] = useState();
@@ -47,6 +56,7 @@ const Detail = (props) => {
   const [mtype,setmtype]=useState();
   const [season,setseason]=useState("01");
   const [sandbox,setSandbox]=useState(true);
+  const [magnetUri,setmagnetUri]=useState("");
 
   
   axios
@@ -60,12 +70,6 @@ const Detail = (props) => {
       setimdbrate("Imdb: " + res.data.imdbRating);
       setmetascore("Metascore: " + res.data.Metascore);
       setmtype(res.data.Type);
-
-     
-
-       
-
-      
       setmovielink(
       
         `javascript:window.location.replace("https://database.gdriveplayer.io/player.php?imdb=${props.imval}")`
@@ -178,6 +182,60 @@ const Detail = (props) => {
 
   
   
+  const handleClickOpenYTS= () => {
+    setOpenYTS(true);
+    axios
+    .get(`https://yts.mx/api/v2/list_movies.json?query_term=${props.imval}`)
+    .then((res) => {
+    //setmagnetUri();
+    setmagnetUri(res.data.data.movies[0].torrents[0].hash+"&dn=&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Fopentor.org%3A2710&tr=udp%3A%2F%2Ftracker.ccc.de%3A80&tr=udp%3A%2F%2Ftracker.blackunicorn.xyz%3A6969&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969F");
+     
+    // added uri line
+    window.webtor = window.webtor || [];
+        //console.log(this.props.magnetUri);
+        window.webtor.push({
+            id: 'player',
+            //this is where i want to insert magnet url which i have 
+            magnet: 'magnet:?xt=urn:btih:'+magnetUri,
+            on: function(e) {
+                if (e.name === window.webtor.TORRENT_FETCHED) {
+                    //console.log('Torrent fetched!');
+                }
+                if (e.name === window.webtor.TORRENT_ERROR) {
+                   // console.log('Torrent error!');
+                }
+            },
+            
+            imdbId:`${props.imval}`,
+
+            lang: 'en',
+            i18n: {
+                en: {
+                    common: {
+                        "prepare to play": "Preparing Video Stream... Please Wait...",
+                    },
+                    stat: {
+                        "seeding": "Seeding",
+                        "waiting": "Client initialization",
+                        "waiting for peers": "Waiting for peers",
+                        "from": "from",
+                    },
+                },
+            },
+        });
+
+
+    })
+    .catch((error) => {
+      alert("No Torrent URL Found ");
+      
+    });
+    
+  };
+
+  const handleCloseYTS = () => {
+    setOpenYTS(false);
+  };
 
  
 
@@ -303,7 +361,45 @@ const Detail = (props) => {
           //sandbox="allow-same-origin allow-scripts allow-forms"
           {...(sandbox ? {sandbox:'allow-same-origin allow-scripts allow-forms'}:{})}
         />
+         
+
+          
+
+          
+      
+          <IconButton
+          onClick={handleCloseFs}
+          style={{
+            position: "absolute",
+            top: "5px",
+            left: "5px",
+            color: "white",
+            width: "60px",
+            height: "60px",
+            background: "rgb(0,0,0,0.5)",
+            borderRadius: "100%",
+            
+          }}>
+
+           <ArrowBackIcon fontSize="large" />
+        
+          </IconButton>
+          <ButtonGroup  variant="contained"    style={{
+              position: "absolute",
+              top: "5px",
+              right: "12vw",
+              color: "white",
+              width: "190px",
+              height: "50px",
+              background: "rgb(0,0,0,0.5)",
+              padding:"5px",
+              borderRadius:"5px"
+            
+              
+            }}>
+
           <select 
+          style={{background: "rgb(0,0,0,0.5)",color:"white"}}
           value={movielink}
             onChange={ 
               (event)=>
@@ -325,19 +421,7 @@ const Detail = (props) => {
                 setmovielink(event.target.value+`${props.imval}`);
               }
               }
-            style={{
-              position: "absolute",
-              top: "5px",
-              right: "12vw",
-              color: "white",
-              width: "90px",
-              height: "50px",
-              background: "rgb(0,0,0,0.5)",
-              padding:"5px",
-              borderRadius:"5px"
-            
-              
-            }}
+         
           >
             <option value="https://database.gdriveplayer.io/player.php?imdb=">Server 1</option>
             <option value="https://gomo.to/movie/">Server 2</option>
@@ -345,24 +429,20 @@ const Detail = (props) => {
             <option value="https://v2.vidsrc.me/embed/">Server 4</option>
             <option value="https://videospider.in/getvideo?key=Ez99ULqORLkSi7LH&video_id=">use AdBlocker</option>
             </select>
-      
-          <IconButton
-          onClick={handleCloseFs}
-          style={{
-            position: "absolute",
-            top: "5px",
-            left: "5px",
-            color: "white",
-            width: "60px",
-            height: "60px",
-            background: "rgb(0,0,0,0.5)",
-            borderRadius: "100%",
-            
-          }}>
 
-           <ArrowBackIcon fontSize="large" />
+          <Button>
+          <IconButton
+           onClick={handleClickOpenYTS}
+          >
+
+           <HighQualityIcon  color="primary" fontSize="large" />
         
           </IconButton>
+
+          </Button>
+          </ButtonGroup>
+
+          
 
          
        
@@ -523,6 +603,72 @@ const Detail = (props) => {
       
       </Dialog>
 
+
+      {/* yts component */}
+      <Dialog
+        fullScreen={fullScreen}
+        open={openYTS}
+        onClose={handleCloseYTS}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        
+      >
+        
+        
+          
+          <IconButton
+          onClick={handleCloseYTS}
+          style={{
+            position: "absolute",
+            top: "5px",
+            left: "5px",
+            color: "white",
+            width: "60px",
+            height: "60px",
+            background: "rgb(0,0,0,0.5)",
+            borderRadius: "100%",
+            
+          }}>
+
+           <ArrowBackIcon fontSize="large" />
+        
+          </IconButton>
+          <Button
+        variant="contained"
+        color="secondary"
+        style={{
+          position: "absolute",
+          top: "5px",
+          right: "10px",
+          color: "white",
+          width: "60px",
+          height: "60px",
+          background: "rgb(0,0,0,0.5)",
+          borderRadius: "100%",
+          
+        }}
+      >
+        <a href={'magnet:?xt=urn:btih:'+magnetUri} download style={{textDecoration:"none", color:"white"}}>
+          <CloudDownloadIcon />
+        </a>
+      </Button>
+     
+        {/* <Magnet magnetUri={magnetUri}/> */}
+        <div id="player" className="webtor" ></div>
+        <ScriptTag type="text/javascript" src='https://cdn.jsdelivr.net/npm/@webtor/player-sdk-js/dist/index.min.js' />
+        
+       
+        
+          
+ 
+
+
+
+
+         
+       
+      </Dialog>
+    
 
 
     </>
