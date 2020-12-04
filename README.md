@@ -58,6 +58,7 @@ A Netflix Clone App built using React js , Material UI & OMDb API that allows se
 - [YTS API](https://yts.mx/api)
 - [OMDb](http://www.omdbapi.com/)
 - [TMDb](https://www.themoviedb.org/)
+- [Firebase tools](https://www.npmjs.com/package/firebase)
 
 
 ### Installing
