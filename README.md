@@ -34,6 +34,8 @@ A Netflix Clone App built using React js , Material UI & OMDb API that allows se
 -  Direct Movie/Webseries Links.
 -  Multiple Servers/Torrent Links (4 Servers per movie).
 -  Dedicated Video player with captions, Speed & Quality change (currently supports 720p).
+-  Add movies/webseries to favourites.
+-  Firebase login/sigup with reset password support.
 
 
 ![Demonstartion Video](https://j.gifs.com/lxrwJl.gif)
