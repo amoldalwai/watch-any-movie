@@ -32,6 +32,7 @@
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
+        <li><a href="#screenshots">screenshots</a></li>
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
@@ -56,25 +57,51 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-There are many great README templates available on GitHub, however, I didn't find one that really suit my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
+<p align="center">
+  <a href="https://watchanymoviez.web.app/">
+    <img src="https://github.com/amoldalwai/watch-any-movie/blob/main/screenshot/Photos/homepage_macbookgold_front.png" alt="Logo" width="500" height="500">
+  </a>
+</p>
 
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should element DRY principles to the rest of your life :smile:
+A Netflix Clone App built using React JS , Material UI , TMDb API and Movie Spider API that allows searching of 10000+ movies and webseries and provides information about their plot, IMDB rating, MetaScore, Genre, and Year in which it is released, along with high-quality audio and video streaming from various servers using custom made Movie Spider API.
 
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have have contributed to expanding this template!
+Features:
+* Signup & Login with ForgetPassword and Logout feature using Firebase along with hosting.
+* Searching for 10000+ movies and webseries through TMDb API.
+* Streaming Movies and webseries from various servers using Movie Spider API.
+* Material UI to provide a Netflix like experience.
 
-A list of commonly used resources that I find helpful are listed in the acknowledgements.
+The site is made for educational purposes!
+
+### Screenshots
+<p align="center">
+<img src="https://github.com/amoldalwai/watch-any-movie/blob/main/screenshot/Photos/1628604191557.png" width="250" height="450" /> 
+<img src="https://github.com/amoldalwai/watch-any-movie/blob/main/screenshot/Photos/1628604191510.png" width="250" height="450" /> 
+<img src="https://github.com/amoldalwai/watch-any-movie/blob/main/screenshot/Photos/1628604191533.png" width="250" height="450" /> 
+</p>
+<p align="center">
+<img src="https://github.com/amoldalwai/watch-any-movie/blob/main/screenshot/Photos/1628604191310.png" width="250" height="450" /> 
+<img src="https://github.com/amoldalwai/watch-any-movie/blob/main/screenshot/Photos/1628604191337.png" width="250" height="450" /> 
+<img src="https://github.com/amoldalwai/watch-any-movie/blob/main/screenshot/Photos/1628604191362.png" width="250" height="450" /> 
+</p>
+<p align="center">
+<img src="https://github.com/amoldalwai/watch-any-movie/blob/main/screenshot/Photos/1628604191385.png" width="250" height="450" /> 
+<img src="https://github.com/amoldalwai/watch-any-movie/blob/main/screenshot/Photos/1628604191409.png" width="250" height="450" /> 
+<img src="https://github.com/amoldalwai/watch-any-movie/blob/main/screenshot/Photos/1628604191438.png" width="250" height="450" /> 
+</p>
+
+
 
 ### Built With
-
-This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-* [Bootstrap](https://getbootstrap.com)
-* [JQuery](https://jquery.com)
-* [Laravel](https://laravel.com)
+List of major frameworks used in building the project. including Add-ons/plugins for acknowledgement.
+- [Material-UI](https://www.npmjs.com/package/@material-ui/core)
+- [Bootstrap](https://www.npmjs.com/package/bootstrap)
+- [Axios](https://www.npmjs.com/package/axios)
+- [Ghpages](https://www.npmjs.com/package/ghpages)
+- [Movie Spider API](https://github.com/amoldalwai/Movie-Spider)
+- [TMDb](https://www.themoviedb.org/)
+- [Firebase tools](https://www.npmjs.com/package/firebase)
 
 
 
