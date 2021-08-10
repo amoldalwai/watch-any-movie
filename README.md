@@ -17,9 +17,9 @@
     <br />
     <a href="https://watchanymoviez.web.app/">View Demo</a>
     ·
-    <a href="https://watchanymoviez.web.app/issues">Report Bug</a>
+    <a href="https://github.com/amoldalwai/watch-any-movie/issues">Report Bug</a>
     ·
-    <a href="https://watchanymoviez.web.app/issues">Request Feature</a>
+    <a href="https://github.com/amoldalwai/watch-any-movie/issues">Request Feature</a>
   </p>
 </p>
 
